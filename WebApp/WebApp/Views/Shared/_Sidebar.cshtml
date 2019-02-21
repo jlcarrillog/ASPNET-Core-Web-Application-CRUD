@@ -1,0 +1,34 @@
+﻿@addTagHelper *, WebApp
+
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">Main</li>
+            <li asp-controller="Home" class="treeview">
+                <a href="">
+                    <i class="fa fa-files-o"></i>
+                    <span>Dashboard</span>
+                    <span class="pull-right-container">
+                        <span class="label label-primary pull-right">1</span>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li asp-treeview-controller="Home" asp-treeview-action="Dashboard">
+                        <a asp-controller="Home" asp-action="Dashboard">
+                            <i class="fa fa-circle-o"></i> Top Navigation
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="header">Sections</li>
+            <li asp-controller="Empleados">
+                <a asp-controller="Empleados" asp-action="Index">
+                    <i class="fa fa-user"></i> <span>Empleados</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
