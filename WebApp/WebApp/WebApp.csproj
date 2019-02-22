@@ -14,11 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
     <Content Remove="Views\Shared\Error.Original.cshtml" />
     <Content Remove="Views\Shared\_CookieConsentPartial.Original.cshtml" />
     <Content Remove="Views\Shared\_Layout.Original.cshtml" />
     <Content Remove="Views\Shared\_LoginPartial.Original.cshtml" />
     <Content Remove="Views\Shared\_ValidationScriptsPartial.Original.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
   <ItemGroup>

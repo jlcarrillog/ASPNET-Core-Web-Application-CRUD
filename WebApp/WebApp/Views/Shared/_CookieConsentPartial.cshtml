@@ -6,34 +6,20 @@
 }
 @if (showBanner)
 {
-    <nav id="cookieConsent" style="z-index: 1030" class="navbar navbar-expand-md navbar-light fixed-top bg-light" role="alert">
-        <div class="container">
-            <a class="navbar-brand"><span class="fa fa-info-circle" aria-hidden="true"></span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cookieText" aria-controls="cookieText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="cookieText">
-                <span class="navbar-text mr-auto mt-2 mt-md-0">Use this space to summarize your privacy and cookie use policy.</span>
-                <div class="my-2 my-md-0">
-                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info">Learn More</a>
-                    <button type="button" class="btn btn-secondary" data-cookie-string="@cookieString">Accept</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="cookieConsent" class="alert alert-warning alert-dismissible fade in" role="alert">
+        <button class="close" aria-label="Close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <h4>Politica de privacidad de cookies</h4>
+        <p>
+            <a asp-controller="Home" asp-action="Privacy" class="btn btn-info">Leer mas</a>
+            <button type="button" class="btn btn-success" data-cookie-string="@cookieString">Acceptar</button>
+        </p>
+    </div>
     <script>
         (function () {
             document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
                 document.cookie = el.target.dataset.cookieString;
-                document.querySelector("#cookieConsent").classList.add("invisible");
+                $("#cookieConsent").alert('close');
             }, false);
         })();
     </script>
 }
-@*<div style="background: rgb(243, 156, 18); padding: 20px 30px; font-size: 16px; font-weight: 600; z-index: 999999;">
-    <a title="Never show me this again!" class="float-right" style="color: rgb(255, 255, 255); font-size: 20px;" href="#" data-toggle="tooltip" data-placement="left">×</a>
-    <a style="color: rgba(255, 255, 255, 0.9); text-decoration: none; margin-right: 10px; display: inline-block;" href="https://themequarry.com">
-        Ready to sell your theme? Submit your theme to our new marketplace now and let over 200k visitors see it!
-    </a>
-    <a class="btn btn-default btn-sm" style="background: rgb(255, 255, 255); border: 0px; border-image: none; color: rgb(243, 156, 18); font-weight: 600; margin-top: -5px; box-shadow: none;" href="https://themequarry.com">Let's Do It!</a>
-</div>*@
