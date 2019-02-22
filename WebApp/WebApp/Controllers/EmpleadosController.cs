@@ -142,22 +142,5 @@ namespace WebApp.Controllers
 
             return View(model);
         }
-
-        // POST: Empleados/Delete/0000000-0000-0000-0000-000000000000
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(Guid id)
-        {
-            var model = _context.Find(id);
-
-            if (model == null)
-            {
-                return NotFound();
-            }
-
-            _context.Remove(model.EmpleadoID);
-
-            return RedirectToAction(nameof(Index));
-        }
     }
 }
