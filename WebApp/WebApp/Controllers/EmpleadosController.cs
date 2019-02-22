@@ -28,14 +28,14 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var empleado = _context.Find(id);
+            var model = _context.Find(id);
 
-            if (empleado == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return View(empleado);
+            return View(model);
         }
 
         // GET: Empleados/Create
@@ -47,22 +47,22 @@ namespace WebApp.Controllers
         // POST: Empleados/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Empleado empleado)
+        public IActionResult Create(Empleado model)
         {
-            if (empleado.EmpleadoID == Guid.Empty)
+            if (model.EmpleadoID == Guid.Empty)
             {
-                empleado.EmpleadoID = Guid.NewGuid();
+                model.EmpleadoID = Guid.NewGuid();
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Add(empleado);
+                    _context.Add(model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (_context.Find(empleado.EmpleadoID) == null)
+                    if (_context.Find(model.EmpleadoID) == null)
                     {
                         return NotFound();
                     }
@@ -73,7 +73,7 @@ namespace WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleado);
+            return View(model);
         }
 
         // GET: Empleados/Edit/0000000-0000-0000-0000-000000000000
@@ -84,21 +84,21 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var empleado = _context.Find(id);
+            var model = _context.Find(id);
 
-            if (empleado == null)
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(empleado);
+            return View(model);
         }
 
         // POST: Empleados/Edit/0000000-0000-0000-0000-000000000000
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, Empleado empleado)//[Bind("EmpleadoID,Nombre,Edad")] 
+        public IActionResult Edit(Guid id, Empleado model)//[Bind("EmpleadoID,Nombre,Edad")] 
         {
-            if (id != empleado.EmpleadoID)
+            if (id != model.EmpleadoID)
             {
                 return BadRequest();
             }
@@ -107,11 +107,11 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(empleado);
+                    _context.Update(model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (_context.Find(empleado.EmpleadoID) == null)
+                    if (_context.Find(model.EmpleadoID) == null)
                     {
                         return NotFound();
                     }
@@ -122,7 +122,7 @@ namespace WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(empleado);
+            return View(model);
         }
 
         // GET: Empleados/Delete/0000000-0000-0000-0000-000000000000
@@ -133,14 +133,14 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var empleado = _context.Find(id);
+            var model = _context.Find(id);
 
-            if (empleado == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return View(empleado);
+            return View(model);
         }
 
         // POST: Empleados/Delete/0000000-0000-0000-0000-000000000000
@@ -148,14 +148,14 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Guid id)
         {
-            var empleado = _context.Find(id);
+            var model = _context.Find(id);
 
-            if (empleado == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            _context.Remove(empleado.EmpleadoID);
+            _context.Remove(model.EmpleadoID);
 
             return RedirectToAction(nameof(Index));
         }
