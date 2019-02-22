@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.Linq;
 using System.Text.Encodings.Web;
 
 namespace WebApp.TagHelpers
@@ -19,19 +20,17 @@ namespace WebApp.TagHelpers
         {
             var currentController = ViewContext.RouteData.Values["controller"] as string;
 
-            if (controller == currentController)
+            if (controller.ToLower() == currentController.ToLower())
             {
                 output.AddClass("active", HtmlEncoder.Default);
             }
         }
     }
-    [HtmlTargetElement("li", Attributes = "asp-treeview-controller, asp-treeview-action")]
+    [HtmlTargetElement("li", Attributes = "asp-treeview-controllers")]
     public class LiMenuRuteControllerActionTagHelper : TagHelper
     {
-        [HtmlAttributeName("asp-treeview-controller")]
-        public string controller { get; set; }
-        [HtmlAttributeName("asp-treeview-action")]
-        public string action { get; set; }
+        [HtmlAttributeName("asp-treeview-controllers")]
+        public string controllers { get; set; }
 
         [HtmlAttributeNotBound]
         [ViewContext]
@@ -39,9 +38,10 @@ namespace WebApp.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var currentController = ViewContext.RouteData.Values["controller"] as string;
-            var currentAction = ViewContext.RouteData.Values["action"] as string;
 
-            if (controller == currentController && action == currentAction)
+            string[] acceptedControllers = controllers.Trim().Split(',').Distinct().ToArray();
+            //if (acceptedActions.Contains(currentAction) && acceptedControllers.Contains(currentController))
+            if (acceptedControllers.Contains(currentController))
             {
                 output.AddClass("active", HtmlEncoder.Default);
             }
