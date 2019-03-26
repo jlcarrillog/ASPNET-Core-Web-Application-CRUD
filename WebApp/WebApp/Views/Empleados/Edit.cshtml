@@ -9,7 +9,12 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EmpleadoID" />
+            <input type="hidden" name="id" value="@Model.EmpleadoID" />
+            <div class="form-group">
+                <label asp-for="EmpleadoID" class="control-label"></label>
+                <input asp-for="EmpleadoID" class="form-control" />
+                <span asp-validation-for="EmpleadoID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -17,8 +22,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Edad" class="control-label"></label>
-                <input asp-for="Edad" type="number" class="form-control" />
+                <input asp-for="Edad" class="form-control" />
                 <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" type="file" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-success" />

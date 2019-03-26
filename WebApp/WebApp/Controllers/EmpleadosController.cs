@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,16 +9,13 @@ namespace WebApp.Controllers
 {
     public class EmpleadosController : Controller
     {
-        private readonly EmpleadosDbContext _context;
-        public EmpleadosController(IConfiguration config)
-        {
-            _context = new EmpleadosDbContext(config);
-        }
+        private readonly EmpleadosDbContext context;
+        public EmpleadosController(IConfiguration config) { context = new EmpleadosDbContext(config); }
 
         // GET: Empleados
         public IActionResult Index()
         {
-            return View(_context.ToList());
+            return View(context.ToList());
         }
 
         // GET: Empleados/Details/0000000-0000-0000-0000-000000000000
@@ -28,7 +26,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var model = _context.Find(id);
+            var model = context.Find(id);
 
             if (model == null)
             {
@@ -47,7 +45,7 @@ namespace WebApp.Controllers
         // POST: Empleados/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Empleado model)
+        public IActionResult Create(Empleado model, IFormFile Foto)
         {
             if (model.EmpleadoID == Guid.Empty)
             {
@@ -58,11 +56,12 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    _context.Add(model);
+                    model.Foto = FileConverter.ConvertBinary(Foto);
+                    context.Add(model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (_context.Find(model.EmpleadoID) == null)
+                    if (context.Find(model.EmpleadoID) == null)
                     {
                         return NotFound();
                     }
@@ -83,8 +82,7 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-
-            var model = _context.Find(id);
+            var model = context.Find(id);
 
             if (model == null)
             {
@@ -96,22 +94,18 @@ namespace WebApp.Controllers
         // POST: Empleados/Edit/0000000-0000-0000-0000-000000000000
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, Empleado model)//[Bind("EmpleadoID,Nombre,Edad")] 
+        public IActionResult Edit(Guid id, Empleado model, IFormFile Foto)//[Bind("EmpleadoID,Nombre,Edad")] 
         {
-            if (id != model.EmpleadoID)
-            {
-                return BadRequest();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(model);
+                    model.Foto = FileConverter.ConvertBinary(Foto);
+                    context.Update(id, model);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (_context.Find(model.EmpleadoID) == null)
+                    if (context.Find(id) == null)
                     {
                         return NotFound();
                     }
@@ -133,7 +127,7 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var model = _context.Find(id);
+            var model = context.Find(id);
 
             if (model == null)
             {

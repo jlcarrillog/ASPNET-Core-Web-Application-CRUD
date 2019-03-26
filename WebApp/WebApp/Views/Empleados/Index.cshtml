@@ -16,25 +16,25 @@
             <th>
                 @Html.DisplayNameFor(model => model.Edad)
             </th>
-            <th width="100"></th>
+            <th width="200"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Edad)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.EmpleadoID" class="btn btn-primary">Detalles</a> |
-                    <a asp-action="Edit" asp-route-id="@item.EmpleadoID" class="btn btn-warning">Editar</a> |
-                    <a onclick="Delete('@item.EmpleadoID')" class="btn btn-danger">Borrar</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.Edad
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.EmpleadoID" class="btn btn-primary">Detalles</a> |
+                <a asp-action="Edit" asp-route-id="@item.EmpleadoID" class="btn btn-warning">Editar</a> |
+                <a onclick="Delete('@item.EmpleadoID')" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

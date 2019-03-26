@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Empleados";
     ViewData["SubTitle"] = "Detalle";
+    string foto = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI2IDI2IiBpZD0i0KHQu9C+0LlfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjYgMjYiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0xNi44MDM1ODg5LDE0LjQ2MDUxMDNjMi4wODIwOTIzLTEuMjgxMTI3OSwzLjQ3NzY2MTEtMy41NzIzMjY3LDMuNDc3NjYxMS02LjE4ODUzNzYgIEMyMC4yODEyNSw0LjI2MjIwNywxNy4wMTQ2NDg0LDEsMTMsMVM1LjcxODc1LDQuMjYyMjA3LDUuNzE4NzUsOC4yNzE5NzI3YzAsMi42MTYyMTA5LDEuMzk1NTY4OCw0LjkwNzQwOTcsMy40Nzc2NjExLDYuMTg4NTM3NiAgYy00LjQ5NTc4ODYsMS4wMDcxNDExLTcuNjUwNTEyNywzLjc1ODM2MTgtNy42NTA1MTI3LDcuMDg3ODI5NkMxLjU0NTg5ODQsMjQuMjcyOTQ5Miw4Ljc0NjA5MzgsMjUsMTMsMjUgIHMxMS40NTQxMDE2LTAuNzI3MDUwOCwxMS40NTQxMDE2LTMuNDUxNjYwMkMyNC40NTQxMDE2LDE4LjIxODg3MjEsMjEuMjk5Mzc3NCwxNS40Njc2NTE0LDE2LjgwMzU4ODksMTQuNDYwNTEwM3ogICBNNy4yMTg3NSw4LjI3MTk3MjdDNy4yMTg3NSw1LjA4OTM1NTUsOS44MTI1LDIuNSwxMywyLjVzNS43ODEyNSwyLjU4OTM1NTUsNS43ODEyNSw1Ljc3MTk3MjdTMTYuMTg3NSwxNC4wNDM0NTcsMTMsMTQuMDQzNDU3ICBTNy4yMTg3NSwxMS40NTQ1ODk4LDcuMjE4NzUsOC4yNzE5NzI3eiBNMTMsMjMuNWMtNi4xMTQ5OTAyLDAtOS43NzUzOTA2LTEuMjg5OTc4LTkuOTUzNjc0My0xLjk1NjcyNjEgIEMzLjA1MDk2NDQsMTguMjM0NTU4MSw3LjUxNDU4NzQsMTUuNTQzNDU3LDEzLDE1LjU0MzQ1N2M1LjQ4NDg2MzMsMCw5Ljk0ODEyMDEsMi42OTA2MTI4LDkuOTUzNjEzMyw1Ljk5ODg0MDMgIEMyMi43Nzk3ODUyLDIyLjIwODU1NzEsMTkuMTE5MDE4NiwyMy41LDEzLDIzLjV6IiBmaWxsPSIjMUQxRDFCIi8+PC9zdmc+";
+    if (Model.Foto != null)
+    {
+        foto = "data:image;base64," + Convert.ToBase64String(Model.Foto);
+    }
 }
 
 <div>
@@ -10,16 +15,34 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd>
+            <img src="@foto" width="100" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpleadoID)
+        </dt>
+        <dd>
+            @Model.EmpleadoID
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Nombre)
+            @Model.Nombre
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd>
+            @Model.Direccion
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Edad)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Edad)
+            @Model.Edad
         </dd>
     </dl>
 </div>
